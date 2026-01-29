@@ -1,0 +1,117 @@
+/* reset */
+body {
+  margin: 0;
+  font-family: serif;
+  color: black;
+}
+
+/* page wrapper */
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 6rem;
+}
+
+/* title */
+.title-wrap {
+  text-align: center;
+}
+
+h1 {
+  font-size: 4.5rem;
+  line-height: 0.9;
+  font-weight: normal;
+  margin: 0;
+}
+
+/* subtitle */
+.subtitle {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+/* bio */
+.bio {
+  margin-top: 3rem;
+  font-size: 0.95rem;
+  color: rgba(0,0,0,0.6);
+}
+
+/* nav */
+.nav {
+  position: fixed;
+  top: 1.2rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 1.25rem;
+  font-size: 1.25rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: rgba(0,0,0,0.55);
+}
+
+.nav a:hover {
+  color: black;
+}
+/* overall two-column layout */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  width: 90%;
+  margin: 6rem auto;
+}
+
+/* left image column */
+.images {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  max-height: 80vh;      /* or 100vh minus padding */
+  overflow-y: auto;      /* enable vertical scroll */
+}
+/* image placeholders (Cargo-like) */
+.img-box {
+  background: #eee;
+  border: 1px dashed #ccc;
+}
+
+/* sizes similar to Cargo */
+.img-box.tall {
+  height: 420px;
+}
+
+.img-box.square {
+  height: 260px;
+}
+
+/* right text column */
+.text {
+  position: sticky;      /* keeps it fixed in viewport */
+  top: 6rem;             /* matches your .page padding-top */
+}
+
+.subtitle {
+  margin-top: 2rem;
+  font-size: 1.1rem;
+}
+
+.bio {
+  margin-top: 3rem;
+  color: rgba(0,0,0,0.6);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .layout {
+ display: grid;
+  grid-template-columns: 35% 1fr; /* left column narrower */
+  gap: 4rem;
+  width: 90%;
+  margin: 6rem auto;
+  align-items: start;
+}
