@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const experiments = await getCollection('sandbox', ({ data }) => !data.draft);
+const sortedExperiments = experiments.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Sandbox">
+  <section class="sandbox-page">
+    <header class="page-header">
+      <h1 class="page-title">Sandbox</h1>
+      <p class="page-description">
+        Experiments, explorations, and works in progress.
+      </p>
+    </header>
+    
+    <div class="experiments-grid">
+      {sortedExperiments.map((experiment) => (
+        <a href={`/sandbox/${experiment.slug}`} class="experiment-card">
+          <div class="experiment-image">
+            {experiment.data.image ? (
+              <img src={experiment.data.image} alt={experiment.data.title} />
+            ) : (
+              <div class="placeholder">{experiment.data.title}</div>
+            )}
+          </div>
+          <h2 class="experiment-title">{experiment.data.title}</h2>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .sandbox-page {
+    padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  .page-header {
+    margin-bottom: var(--space-2xl);
+    max-width: 600px;
+  }
+  
+  .page-title {
+    font-size: var(--text-3xl);
+    font-style: italic;
+    margin-bottom: var(--space-md);
+  }
+  
+  .page-description {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+  }
+  
+  .experiments-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-lg);
+  }
+  
+  .experiment-card {
+    text-decoration: none;
+    display: block;
+  }
+  
+  .experiment-image {
+    aspect-ratio: 1;
+    background: var(--color-bg-alt);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .experiment-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+  
+  .experiment-card:hover .experiment-image img {
+    transform: scale(1.05);
+  }
+  
+  .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-subtle);
+    font-size: var(--text-sm);
+    border: 1px dashed var(--color-border);
+  }
+  
+  .experiment-title {
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-text-muted);
+    transition: color var(--transition-fast);
+  }
+  
+  .experiment-card:hover .experiment-title {
+    color: var(--color-text);
+  }
+  
+  @media (max-width: 900px) {
+    .experiments-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 500px) {
+    .experiments-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+    
+    .experiment-title {
+      font-size: var(--text-xs);
+    }
+  }
+</style>

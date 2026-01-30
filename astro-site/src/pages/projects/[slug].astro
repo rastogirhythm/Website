@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={project.data.title} description={project.data.description}>
+  <article class="project-detail">
+    <header class="project-header">
+      <a href="/projects" class="back-link">← All Projects</a>
+      <h1 class="project-title">{project.data.title}</h1>
+      <div class="project-meta">
+        <span class="project-date">{project.data.date.getFullYear()}</span>
+        {project.data.tags.length > 0 && (
+          <div class="project-tags">
+            {project.data.tags.map((tag) => (
+              <span class="tag">{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </header>
+    
+    {project.data.image && (
+      <div class="project-hero">
+        <img src={project.data.image} alt={project.data.title} />
+      </div>
+    )}
+    
+    <div class="project-content prose">
+      <Content />
+    </div>
+    
+    <footer class="project-footer">
+      <a href="/projects" class="link">← Back to all projects</a>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .project-detail {
+    padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  .project-header {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .back-link {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: var(--space-lg);
+    transition: color var(--transition-fast);
+  }
+  
+  .back-link:hover {
+    color: var(--color-text);
+  }
+  
+  .project-title {
+    font-size: var(--text-3xl);
+    font-style: italic;
+    margin-bottom: var(--space-md);
+  }
+  
+  .project-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-md);
+    color: var(--color-text-muted);
+  }
+  
+  .project-date {
+    font-size: var(--text-sm);
+    letter-spacing: 0.05em;
+  }
+  
+  .project-tags {
+    display: flex;
+    gap: var(--space-xs);
+  }
+  
+  .tag {
+    font-size: var(--text-xs);
+    padding: 0.2em 0.6em;
+    background: var(--color-bg-alt);
+    border-radius: 2px;
+  }
+  
+  .project-hero {
+    margin-bottom: var(--space-xl);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .project-hero img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Prose styles for markdown content */
+  .prose {
+    max-width: var(--content-width);
+    font-size: var(--text-base);
+    line-height: 1.8;
+  }
+  
+  .prose :global(h2) {
+    font-size: var(--text-2xl);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-md);
+  }
+  
+  .prose :global(h3) {
+    font-size: var(--text-xl);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-sm);
+  }
+  
+  .prose :global(p) {
+    margin-bottom: var(--space-md);
+    color: var(--color-text-muted);
+  }
+  
+  .prose :global(img) {
+    border-radius: 2px;
+    margin: var(--space-lg) 0;
+  }
+  
+  .prose :global(blockquote) {
+    border-left: 2px solid var(--color-border);
+    padding-left: var(--space-md);
+    font-style: italic;
+    color: var(--color-text-muted);
+  }
+  
+  .prose :global(ul), .prose :global(ol) {
+    margin-bottom: var(--space-md);
+    padding-left: var(--space-lg);
+    color: var(--color-text-muted);
+  }
+  
+  .prose :global(li) {
+    margin-bottom: var(--space-xs);
+  }
+  
+  .prose :global(a) {
+    color: var(--color-text);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  
+  .project-footer {
+    margin-top: var(--space-2xl);
+    padding-top: var(--space-lg);
+    border-top: 1px solid var(--color-border);
+  }
+</style>

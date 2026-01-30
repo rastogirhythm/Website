@@ -1,0 +1,310 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+import { getCollection } from 'astro:content';
+
+// Get featured projects (you can add a 'featured' field to frontmatter)
+const projects = await getCollection('projects');
+const featuredProjects = projects
+  .filter(p => p.data.featured)
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <section class="hero">
+    <!-- Featured Images - Floating artistic placement -->
+    <div class="hero-images">
+      {featuredProjects.length > 0 ? (
+        featuredProjects.map((project, i) => (
+          <a 
+            href={`/projects/${project.slug}`} 
+            class={`hero-image-link pos-${i + 1}`}
+          >
+            <div class="hero-image">
+              {project.data.image ? (
+                <img src={project.data.image} alt={project.data.title} />
+              ) : (
+                <div class="placeholder">{project.data.title}</div>
+              )}
+            </div>
+            <span class="hero-image-title">{project.data.title}</span>
+          </a>
+        ))
+      ) : (
+        <>
+          <div class="hero-image-link pos-1">
+            <div class="hero-image">
+              <div class="placeholder">Project 1</div>
+            </div>
+          </div>
+          <div class="hero-image-link pos-2">
+            <div class="hero-image">
+              <div class="placeholder">Project 2</div>
+            </div>
+          </div>
+          <div class="hero-image-link pos-3">
+            <div class="hero-image">
+              <div class="placeholder">Project 3</div>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+    
+    <div class="hero-content">
+      <!-- Name with elegant spacing -->
+      <h1 class="hero-name">
+        <span class="name-first"><em>rhythm</em></span>
+        <span class="name-last">rastogi</span>
+      </h1>
+      
+      <!-- Tagline -->
+      <p class="hero-tagline">{site.tagline}</p>
+      
+      <!-- Location -->
+      <p class="hero-location">{site.location}</p>
+    </div>
+  </section>
+  
+  <!-- Scroll hint -->
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <svg width="12" height="24" viewBox="0 0 12 24" fill="none">
+      <path d="M6 0v22M1 17l5 5 5-5" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+  </div>
+  
+  <!-- Brief intro section -->
+  <section class="intro">
+    <div class="intro-content">
+      <p class="intro-text">{site.bio}</p>
+      <div class="intro-links">
+        <a href="/about" class="link">more about me</a>
+        <a href="/projects" class="link">view all projects</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    padding: var(--space-3xl) var(--space-2xl) var(--space-xl);
+    align-items: center;
+  }
+  
+  .hero-content {
+    max-width: 500px;
+    margin-left: auto;
+  }
+  
+  .hero-name {
+    font-size: var(--text-display);
+    font-weight: 400;
+    line-height: 0.95;
+    margin-bottom: var(--space-lg);
+  }
+  
+  .name-first {
+    display: block;
+    font-style: italic;
+  }
+  
+  .name-last {
+    display: block;
+    letter-spacing: -0.02em;
+  }
+  
+  .hero-tagline {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    max-width: 380px;
+    line-height: 1.6;
+    margin-bottom: var(--space-md);
+  }
+  
+  .hero-location {
+    font-size: var(--text-sm);
+    color: var(--color-text-subtle);
+    letter-spacing: 0.02em;
+  }
+  
+  /* Floating Images */
+  .hero-images {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-md);
+  }
+  
+  .hero-image-link {
+    text-decoration: none;
+    transition: transform var(--transition-base);
+  }
+  
+  .hero-image-link:hover {
+    transform: translateY(-4px);
+  }
+  
+  .hero-image-link:hover .hero-image-title {
+    opacity: 1;
+  }
+  
+  /* Grid positioning */
+  .pos-1 {
+    grid-column: 1;
+    grid-row: 1;
+  }
+  
+  .pos-2 {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  
+  .pos-3 {
+    grid-column: span 2;
+  }
+  
+  .hero-image {
+    background: var(--color-bg-alt);
+    border-radius: 2px;
+    overflow: hidden;
+    aspect-ratio: 4/3;
+  }
+  
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+  
+  .hero-image-link:hover .hero-image img {
+    transform: scale(1.02);
+  }
+  
+  .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-subtle);
+    font-size: var(--text-sm);
+    border: 1px dashed var(--color-border);
+  }
+  
+  .hero-image-title {
+    display: block;
+    margin-top: var(--space-xs);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+  }
+  
+  /* Scroll Hint */
+  .scroll-hint {
+    position: absolute;
+    bottom: var(--space-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-text-subtle);
+    font-size: var(--text-xs);
+    letter-spacing: 0.1em;
+    animation: float 2s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(6px); }
+  }
+  
+  /* Intro Section */
+  .intro {
+    padding: var(--space-3xl) var(--space-2xl);
+    border-top: 1px solid var(--color-border);
+  }
+  
+  .intro-content {
+    max-width: var(--content-width);
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .intro-text {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-lg);
+  }
+  
+  .intro-links {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-lg);
+  }
+  
+  /* Mobile */
+  @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: var(--space-2xl);
+      padding: var(--space-2xl) var(--space-lg) var(--space-xl);
+      min-height: auto;
+    }
+    
+    .hero-content {
+      max-width: 100%;
+      text-align: center;
+      margin: 0 auto;
+      order: -1;
+    }
+    
+    .hero-tagline {
+      margin: 0 auto var(--space-md);
+    }
+    
+    .hero-images {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+    
+    .pos-3 {
+      grid-column: span 2;
+      max-width: 60%;
+      margin: 0 auto;
+    }
+    
+    .scroll-hint {
+      display: none;
+    }
+    
+    .intro {
+      padding: var(--space-3xl) var(--space-lg);
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .hero-name {
+      font-size: var(--text-3xl);
+    }
+    
+    .hero-images {
+      grid-template-columns: 1fr;
+    }
+    
+    .pos-3 {
+      grid-column: span 1;
+      max-width: 100%;
+    }
+  }
+</style>
