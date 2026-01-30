@@ -1,0 +1,205 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import site from '../data/site.json';
+---
+
+<BaseLayout title="About">
+  <section class="about">
+    <div class="about-header">
+      <h1 class="about-title">About</h1>
+    </div>
+    
+    <div class="about-content">
+      <div class="about-main">
+        <!-- Portrait placeholder -->
+        <div class="about-portrait">
+          <div class="portrait-image">
+            <!-- Add your photo here -->
+            <div class="placeholder">Photo</div>
+          </div>
+        </div>
+        
+        <div class="about-text">
+          <p class="about-intro">
+            {site.bio}
+          </p>
+          
+          <div class="about-details">
+            <div class="detail-block">
+              <h3 class="detail-label">Based in</h3>
+              <p>{site.location}</p>
+            </div>
+            
+            <div class="detail-block">
+              <h3 class="detail-label">Education</h3>
+              <p>{site.education}</p>
+            </div>
+            
+            <div class="detail-block">
+              <h3 class="detail-label">Contact</h3>
+              <p>
+                <a href={`mailto:${site.email}`} class="link">{site.email}</a>
+              </p>
+            </div>
+          </div>
+          
+          <!-- Extended bio - edit this section freely -->
+          <div class="about-extended">
+            <p>
+              My practice sits at the intersection of sociology and design, 
+              exploring how communities shape and are shaped by their environments. 
+              I'm particularly interested in the ways cultural practices emerge 
+              from ecological relationships.
+            </p>
+            <p>
+              Currently, I'm focused on research projects that examine 
+              sustainable community practices and their potential for 
+              broader social transformation.
+            </p>
+          </div>
+          
+          <div class="about-links">
+            <a href={site.resume} target="_blank" rel="noopener noreferrer" class="link link-external">
+              Download CV
+            </a>
+            {site.social.map(({ label, url }) => (
+              <a href={url} target="_blank" rel="noopener noreferrer" class="link link-external">
+                {label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .about {
+    padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+  }
+  
+  .about-header {
+    max-width: var(--max-width);
+    margin: 0 auto var(--space-2xl);
+  }
+  
+  .about-title {
+    font-size: var(--text-3xl);
+    font-style: italic;
+  }
+  
+  .about-content {
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  .about-main {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  
+  .about-portrait {
+    position: sticky;
+    top: var(--space-3xl);
+  }
+  
+  .portrait-image {
+    aspect-ratio: 3/4;
+    background: var(--color-bg-alt);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  .portrait-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-subtle);
+    font-size: var(--text-sm);
+    border: 1px dashed var(--color-border);
+  }
+  
+  .about-text {
+    max-width: 600px;
+  }
+  
+  .about-intro {
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+    color: var(--color-text-muted);
+  }
+  
+  .about-details {
+    display: grid;
+    gap: var(--space-md);
+    margin-bottom: var(--space-xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 1px solid var(--color-border);
+  }
+  
+  .detail-block {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    gap: var(--space-md);
+  }
+  
+  .detail-label {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-subtle);
+    font-family: var(--font-sans);
+    font-weight: 500;
+  }
+  
+  .detail-block p {
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+  
+  .about-extended {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .about-extended p {
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+  }
+  
+  .about-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-lg);
+  }
+  
+  /* Mobile */
+  @media (max-width: 900px) {
+    .about-main {
+      grid-template-columns: 1fr;
+      gap: var(--space-xl);
+    }
+    
+    .about-portrait {
+      position: static;
+      max-width: 300px;
+    }
+    
+    .detail-block {
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+  }
+</style>

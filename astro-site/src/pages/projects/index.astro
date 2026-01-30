@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects', ({ data }) => !data.draft);
+const sortedProjects = projects.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Projects">
+  <section class="projects-page">
+    <header class="page-header">
+      <h1 class="page-title">Projects</h1>
+      <p class="page-description">
+        Selected work exploring communities, socio-ecologies, and culture.
+      </p>
+    </header>
+    
+    <div class="projects-grid">
+      {sortedProjects.map((project) => (
+        <a href={`/projects/${project.slug}`} class="project-card">
+          <div class="project-image">
+            {project.data.image ? (
+              <img src={project.data.image} alt={project.data.title} />
+            ) : (
+              <div class="placeholder">{project.data.title}</div>
+            )}
+          </div>
+          <div class="project-info">
+            <h2 class="project-title">{project.data.title}</h2>
+            <p class="project-date">{project.data.date.getFullYear()}</p>
+            <p class="project-description">{project.data.description}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .projects-page {
+    padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+    max-width: var(--max-width);
+    margin: 0 auto;
+  }
+  
+  .page-header {
+    margin-bottom: var(--space-2xl);
+    max-width: 600px;
+  }
+  
+  .page-title {
+    font-size: var(--text-3xl);
+    font-style: italic;
+    margin-bottom: var(--space-md);
+  }
+  
+  .page-description {
+    color: var(--color-text-muted);
+    font-size: var(--text-lg);
+  }
+  
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+  
+  .project-card {
+    text-decoration: none;
+    display: block;
+  }
+  
+  .project-image {
+    aspect-ratio: 4/3;
+    background: var(--color-bg-alt);
+    border-radius: 2px;
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+  }
+  
+  .project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-slow);
+  }
+  
+  .project-card:hover .project-image img {
+    transform: scale(1.03);
+  }
+  
+  .placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-subtle);
+    font-size: var(--text-sm);
+    border: 1px dashed var(--color-border);
+  }
+  
+  .project-title {
+    font-size: var(--text-xl);
+    font-weight: 400;
+    margin-bottom: var(--space-xs);
+    transition: color var(--transition-fast);
+  }
+  
+  .project-card:hover .project-title {
+    color: var(--color-accent);
+  }
+  
+  .project-date {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-sm);
+  }
+  
+  .project-description {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 768px) {
+    .projects-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
