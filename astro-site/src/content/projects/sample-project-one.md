@@ -2,7 +2,7 @@
 title: "Sample Project One"
 description: "A research project exploring the intersection of community practices and ecological systems."
 date: 2025-06-15
-image: "/images/projects/project-1.jpg"
+image: "/Website/images/projects/project-1.jpg"
 tags: ["research", "community", "ecology"]
 featured: true
 ---

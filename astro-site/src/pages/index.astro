@@ -79,8 +79,8 @@ const featuredProjects = projects
     <div class="intro-content">
       <p class="intro-text">{site.bio}</p>
       <div class="intro-links">
-        <a href="/about" class="link">more about me</a>
-        <a href="/projects" class="link">view all projects</a>
+        <a href={`${import.meta.env.BASE_URL}about`} class="link">more about me</a>
+        <a href={`${import.meta.env.BASE_URL}projects`} class="link">view all projects</a>
       </div>
     </div>
   </section>

@@ -25,7 +25,7 @@ function formatDate(date: Date) {
 <BaseLayout title={post.data.title} description={post.data.description}>
   <article class="post-detail">
     <header class="post-header">
-      <a href="/blog" class="back-link">← All Posts</a>
+      <a href={`${import.meta.env.BASE_URL}blog`} class="back-link">← All Posts</a>
       <h1 class="post-title">{post.data.title}</h1>
       <time class="post-date">{formatDate(post.data.date)}</time>
     </header>
@@ -35,7 +35,7 @@ function formatDate(date: Date) {
     </div>
     
     <footer class="post-footer">
-      <a href="/blog" class="link">← Back to all posts</a>
+      <a href={`${import.meta.env.BASE_URL}blog`} class="link">← Back to all posts</a>
     </footer>
   </article>
 </BaseLayout>
