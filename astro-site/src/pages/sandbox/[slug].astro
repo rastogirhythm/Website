@@ -17,7 +17,7 @@ const { Content } = await experiment.render();
 <BaseLayout title={experiment.data.title} description={experiment.data.description}>
   <article class="experiment-detail">
     <header class="experiment-header">
-      <a href={`${import.meta.env.BASE_URL}sandbox`} class="back-link">← Sandbox</a>
+      <a href={`${import.meta.env.BASE_URL}/sandbox`} class="back-link">← Sandbox</a>
       <h1 class="experiment-title">{experiment.data.title}</h1>
     </header>
     
@@ -32,7 +32,7 @@ const { Content } = await experiment.render();
     </div>
     
     <footer class="experiment-footer">
-      <a href={`${import.meta.env.BASE_URL}sandbox`} class="link">← Back to sandbox</a>
+      <a href={`${import.meta.env.BASE_URL}/sandbox`} class="link">← Back to sandbox</a>
     </footer>
   </article>
 </BaseLayout>
