@@ -24,50 +24,18 @@ import site from '../data/site.json';
             {site.bio}
           </p>
           
-          <div class="about-details">
-            <div class="detail-block">
-              <h3 class="detail-label">Based in</h3>
-              <p>{site.location}</p>
-            </div>
-            
-            <div class="detail-block">
-              <h3 class="detail-label">Education</h3>
-              <p>{site.education}</p>
-            </div>
-            
-            <div class="detail-block">
-              <h3 class="detail-label">Contact</h3>
-              <p>
-                <a href={`mailto:${site.email}`} class="link">{site.email}</a>
-              </p>
+          <div class="education-section">
+            <h3 class="education-title">Education</h3>
+            <div class="education-item">
+              <p class="education-degree">BA Honors Sociology</p>
+              <p class="education-school">Brown University, USA</p>
+              <p class="education-years">2018-2022.5</p>
             </div>
           </div>
           
-          <!-- Extended bio - edit this section freely -->
-          <div class="about-extended">
-            <p>
-              My practice sits at the intersection of sociology and design, 
-              exploring how communities shape and are shaped by their environments. 
-              I'm particularly interested in the ways cultural practices emerge 
-              from ecological relationships.
-            </p>
-            <p>
-              Currently, I'm focused on research projects that examine 
-              sustainable community practices and their potential for 
-              broader social transformation.
-            </p>
-          </div>
-          
-          <div class="about-links">
-            <a href={site.resume} target="_blank" rel="noopener noreferrer" class="link link-external">
-              Download CV
-            </a>
-            {site.social.map(({ label, url }) => (
-              <a href={url} target="_blank" rel="noopener noreferrer" class="link link-external">
-                {label}
-              </a>
-            ))}
-          </div>
+          <a href="/Website/pdfs/resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-button">
+            Download Resume
+          </a>
         </div>
       </div>
     </div>
@@ -84,9 +52,20 @@ import site from '../data/site.json';
     margin: 0 auto var(--space-2xl);
   }
   
+  @font-face {
+    font-family: 'FrauncesItalic';
+    src: url('/Website/fonts/Fraunces/Fraunces-Italic-VariableFont_SOFT,WONK,opsz,wght.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'FrauncesRoman';
+    src: url('/Website/fonts/Fraunces/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf') format('truetype');
+  }
+
   .about-title {
     font-size: var(--text-3xl);
     font-style: italic;
+    font-family: 'FrauncesItalic';
   }
   
   .about-content {
@@ -134,12 +113,71 @@ import site from '../data/site.json';
     max-width: 600px;
   }
   
+  .education-section {
+    margin-bottom: var(--space-xl);
+  }
+  
+  .education-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-md);
+    color: var(--color-text-subtle);
+  }
+  
+  .education-item {
+    margin-bottom: var(--space-md);
+  }
+  
+  .education-degree {
+    font-family: var(--font-serif);
+    font-size: var(--text-base);
+    color: var(--color-text);
+    margin: 0 0 0.25rem 0;
+    line-height: 1.4;
+  }
+  
+  .education-school {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0 0 0.25rem 0;
+  }
+  
+  .education-years {
+    font-size: var(--text-xs);
+    color: var(--color-text-subtle);
+    margin: 0;
+  }
+  
   .about-intro {
     font-family: var(--font-serif);
     font-size: var(--text-xl);
     line-height: 1.6;
     margin-bottom: var(--space-xl);
     color: var(--color-text-muted);
+  }
+  
+  .resume-button {
+    display: inline-block;
+    padding: 0.625rem 1.25rem;
+    background-color: transparent;
+    color: var(--color-text);
+    text-decoration: none;
+    border: 1.5px solid var(--color-text);
+    border-radius: 2px;
+    font-size: var(--text-sm);
+    font-family: var(--font-serif);
+    letter-spacing: 0.025em;
+    transition: all var(--transition-base);
+    position: relative;
+  }
+  
+  .resume-button:hover {
+    background-color: var(--color-text);
+    color: white;
+    border-color: var(--color-text);
   }
   
   .about-details {

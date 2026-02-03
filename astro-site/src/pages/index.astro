@@ -32,7 +32,7 @@ const featuredProjects = projects
       
       <!-- Social Links -->
       <div class="hero-social">
-        <a href={site.resume} target="_blank" rel="noopener noreferrer" class="social-link">resume↗</a>
+        <a href="mailto:rastogirhythm00@gmail.com" class="social-link">email↗</a>
         {site.social.map(({ label, url }) => (
           <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">{label}↗</a>
         ))}
@@ -40,62 +40,67 @@ const featuredProjects = projects
     </div>
   </section>
   
-  <!-- Brief intro section -->
-  <section class="intro">
-    <div class="intro-content">
-      <p class="intro-text">{site.bio}</p>
-      <div class="intro-links">
-        <a href={`${import.meta.env.BASE_URL}/about`} class="link">more about me</a>
-        <a href={`${import.meta.env.BASE_URL}/projects`} class="link">view all projects</a>
-      </div>
-    </div>
-  </section>
 </BaseLayout>
 
 <style>
+  @font-face {
+    font-family: 'FrauncesRoman';
+    src: url('/Website/fonts/Fraunces/Fraunces-VariableFont_SOFT,WONK,opsz,wght.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'FrauncesItalic';
+    src: url('/Website/fonts/Fraunces/Fraunces-Italic-VariableFont_SOFT,WONK,opsz,wght.ttf') format('truetype');
+  }
+
   /* Hero Section */
   .hero {
     min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--space-xl);
-    padding: var(--space-3xl) var(--space-2xl) var(--space-xl);
+    gap: 1.5rem;
+    padding: var(--space-3xl) var(--space-2xl) var(--space-ul);
     align-items: center;
   }
   
   .hero-content {
-    max-width: 500px;
+    max-width: 480px;
     margin-left: auto;
   }
   
   .hero-name {
-    font-size: var(--text-display);
-    font-weight: 400;
-    line-height: 0.95;
-    margin-bottom: var(--space-lg);
+    font-size: 4.5rem;
+    line-height: 0.78;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+    letter-spacing: -0.01em;
   }
   
   .name-first {
     display: block;
-    font-style: italic;
+    font-family: 'FrauncesItalic', serif;
+    font-weight: 350;
+    letter-spacing: -0.02em;
   }
   
   .name-last {
     display: block;
+    font-family: 'FrauncesRoman', serif;
     letter-spacing: -0.02em;
+    font-weight: 350;
   }
   
   .hero-tagline {
     font-size: var(--text-lg);
-    color: var(--color-text-muted);
+    color: #666666;
     max-width: 380px;
     line-height: 1.6;
-    margin-bottom: var(--space-md);
+    margin-bottom: 1rem;
   }
   
   .hero-location {
     font-size: var(--text-sm);
-    color: var(--color-text-subtle);
+    color: #666666;
     letter-spacing: 0.02em;
     margin-bottom: var(--space-md);
   }
@@ -103,12 +108,13 @@ const featuredProjects = projects
   .hero-social {
     display: flex;
     flex-direction: column;
-    gap: var(--space-xs);
+    gap: 0.25rem;
+    margin-top: 1.875rem;
   }
   
   .social-link {
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
+    color: #666666;
     text-decoration: none;
     transition: color var(--transition-fast);
   }
@@ -122,16 +128,21 @@ const featuredProjects = projects
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
   
   .hero-bg-image {
     width: 100%;
     height: auto;
     object-fit: contain;
-    border-radius: 2px;
-    transform: scale(1);
-    max-width: 150%;
-    margin-left: 20%;
+    border-radius: 4px;
+    max-width: 110%;
+    transform-origin: 30% 35%;
+    transition: transform 800ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  
+  .hero-bg-image:hover {
+    transform: scale(1.25);
   }
   
   /* Intro Section */
@@ -158,6 +169,18 @@ const featuredProjects = projects
     display: flex;
     justify-content: center;
     gap: var(--space-lg);
+  }
+  
+  .link {
+    color: var(--color-text);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-text);
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+  
+  .link:hover {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
   }
   
   /* Mobile */
@@ -189,10 +212,6 @@ const featuredProjects = projects
       grid-column: span 2;
       max-width: 60%;
       margin: 0 auto;
-    }
-    
-    .scroll-hint {
-      display: none;
     }
     
     .intro {
