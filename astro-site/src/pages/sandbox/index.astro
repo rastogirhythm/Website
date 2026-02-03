@@ -33,6 +33,11 @@ const sortedExperiments = experiments.sort((a, b) => b.data.date.valueOf() - a.d
 </BaseLayout>
 
 <style>
+  @font-face {
+    font-family: 'FrauncesItalic';
+    src: url('/Website/fonts/Fraunces/Fraunces-Italic-VariableFont_SOFT,WONK,opsz,wght.ttf') format('truetype');
+  }
+
   .sandbox-page {
     padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
     max-width: var(--max-width);
@@ -47,6 +52,7 @@ const sortedExperiments = experiments.sort((a, b) => b.data.date.valueOf() - a.d
   .page-title {
     font-size: var(--text-3xl);
     font-style: italic;
+    font-family: 'FrauncesItalic';
     margin-bottom: var(--space-md);
   }
   
