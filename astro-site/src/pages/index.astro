@@ -12,43 +12,9 @@ const featuredProjects = projects
 
 <BaseLayout>
   <section class="hero">
-    <!-- Featured Images - Floating artistic placement -->
+    <!-- Featured Images - Static background -->
     <div class="hero-images">
-      {featuredProjects.length > 0 ? (
-        featuredProjects.map((project, i) => (
-          <a 
-            href={`/projects/${project.slug}`} 
-            class={`hero-image-link pos-${i + 1}`}
-          >
-            <div class="hero-image">
-              {project.data.image ? (
-                <img src={project.data.image} alt={project.data.title} />
-              ) : (
-                <div class="placeholder">{project.data.title}</div>
-              )}
-            </div>
-            <span class="hero-image-title">{project.data.title}</span>
-          </a>
-        ))
-      ) : (
-        <>
-          <div class="hero-image-link pos-1">
-            <div class="hero-image">
-              <div class="placeholder">Project 1</div>
-            </div>
-          </div>
-          <div class="hero-image-link pos-2">
-            <div class="hero-image">
-              <div class="placeholder">Project 2</div>
-            </div>
-          </div>
-          <div class="hero-image-link pos-3">
-            <div class="hero-image">
-              <div class="placeholder">Project 3</div>
-            </div>
-          </div>
-        </>
-      )}
+      <img src="/Website/images/hero-bg.jpg" alt="Hero Background" class="hero-bg-image" />
     </div>
     
     <div class="hero-content">
@@ -63,16 +29,16 @@ const featuredProjects = projects
       
       <!-- Location -->
       <p class="hero-location">{site.location}</p>
+      
+      <!-- Social Links -->
+      <div class="hero-social">
+        <a href={site.resume} target="_blank" rel="noopener noreferrer" class="social-link">resume↗</a>
+        {site.social.map(({ label, url }) => (
+          <a href={url} target="_blank" rel="noopener noreferrer" class="social-link">{label}↗</a>
+        ))}
+      </div>
     </div>
   </section>
-  
-  <!-- Scroll hint -->
-  <div class="scroll-hint">
-    <span>scroll</span>
-    <svg width="12" height="24" viewBox="0 0 12 24" fill="none">
-      <path d="M6 0v22M1 17l5 5 5-5" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
-  </div>
   
   <!-- Brief intro section -->
   <section class="intro">
@@ -95,9 +61,6 @@ const featuredProjects = projects
     gap: var(--space-xl);
     padding: var(--space-3xl) var(--space-2xl) var(--space-xl);
     align-items: center;
-    background-image: url('/images/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
   }
   
   .hero-content {
@@ -110,7 +73,6 @@ const featuredProjects = projects
     font-weight: 400;
     line-height: 0.95;
     margin-bottom: var(--space-lg);
-    color: white;
   }
   
   .name-first {
@@ -125,7 +87,7 @@ const featuredProjects = projects
   
   .hero-tagline {
     font-size: var(--text-lg);
-    color: white;
+    color: var(--color-text-muted);
     max-width: 380px;
     line-height: 1.6;
     margin-bottom: var(--space-md);
@@ -133,102 +95,43 @@ const featuredProjects = projects
   
   .hero-location {
     font-size: var(--text-sm);
-    color: white;
+    color: var(--color-text-subtle);
     letter-spacing: 0.02em;
+    margin-bottom: var(--space-md);
+  }
+  
+  .hero-social {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+  
+  .social-link {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+  
+  .social-link:hover {
+    color: var(--color-accent);
   }
   
   /* Floating Images */
   .hero-images {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-md);
-  }
-  
-  .hero-image-link {
-    text-decoration: none;
-    transition: transform var(--transition-base);
-  }
-  
-  .hero-image-link:hover {
-    transform: translateY(-4px);
-  }
-  
-  .hero-image-link:hover .hero-image-title {
-    opacity: 1;
-  }
-  
-  /* Grid positioning */
-  .pos-1 {
-    grid-column: 1;
-    grid-row: 1;
-  }
-  
-  .pos-2 {
-    grid-column: 2;
-    grid-row: 1;
-  }
-  
-  .pos-3 {
-    grid-column: span 2;
-  }
-  
-  .hero-image {
-    background: var(--color-bg-alt);
-    border-radius: 2px;
-    overflow: hidden;
-    aspect-ratio: 4/3;
-  }
-  
-  .hero-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform var(--transition-slow);
-  }
-  
-  .hero-image-link:hover .hero-image img {
-    transform: scale(1.02);
-  }
-  
-  .placeholder {
-    width: 100%;
-    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--color-text-subtle);
-    font-size: var(--text-sm);
-    border: 1px dashed var(--color-border);
   }
   
-  .hero-image-title {
-    display: block;
-    margin-top: var(--space-xs);
-    font-size: var(--text-xs);
-    color: var(--color-text-muted);
-    opacity: 0;
-    transition: opacity var(--transition-fast);
-  }
-  
-  /* Scroll Hint */
-  .scroll-hint {
-    position: absolute;
-    bottom: var(--space-lg);
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-xs);
-    color: var(--color-text-subtle);
-    font-size: var(--text-xs);
-    letter-spacing: 0.1em;
-    animation: float 2s ease-in-out infinite;
-  }
-  
-  @keyframes float {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(6px); }
+  .hero-bg-image {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 2px;
+    transform: scale(1);
+    max-width: 150%;
+    margin-left: 20%;
   }
   
   /* Intro Section */

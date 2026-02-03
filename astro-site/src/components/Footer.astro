@@ -4,17 +4,6 @@ import site from '../data/site.json';
 
 <footer class="footer">
   <div class="footer-content">
-    <div class="footer-links">
-      {site.social.map(({ label, url }) => (
-        <a href={url} target="_blank" rel="noopener noreferrer" class="footer-link">
-          {label}
-        </a>
-      ))}
-      <a href={site.resume} target="_blank" rel="noopener noreferrer" class="footer-link">
-        resume
-      </a>
-    </div>
-    
     <p class="footer-copyright">
       © {new Date().getFullYear()} {site.name}
     </p>
