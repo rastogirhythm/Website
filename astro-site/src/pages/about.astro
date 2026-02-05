@@ -11,23 +11,30 @@ import site from '../data/site.json';
     
     <div class="about-content">
       <div class="about-main">
-        <!-- Portrait placeholder -->
+        <!-- Portrait -->
         <div class="about-portrait">
           <div class="portrait-image">
-            <!-- Add your photo here -->
-            <div class="placeholder">Photo</div>
+            <img src="/Website/images/about.jpeg" alt="Rhythm Rastogi portrait" />
           </div>
         </div>
         
         <div class="about-text">
           <p class="about-intro">
-            {site.bio}
+            I am a design researcher working across social impact, climate initiatives, and community-led projects. My approach is qualitative, conceptual, and interdisciplinary, drawing from natural patterns, regenerative design, and creative processes.
+          </p>
+
+          <p class="about-intro">
+            Trained in Sociology and Urban Studies at Brown University, I work through field research, participatory methods, and facilitation to understand how people relate to nature, livelihoods, and one another. My practice has taken shape across academia, grassroots movements, and nonprofit spaces, and more recently through curating and creating experiences that experiment with alternative ways of researching and sense-making together.
+          </p>
+
+          <p class="about-intro">
+            Alongside this, I ground my work in material and ecological practice to incorporate ideas of regeneration in everyday life. I've grown pocket forests and a community greenspace in Baroda-Savitri Urban Food Forest. My honors thesis also explored ecological networks as a way of thinking about community ecosystems.
           </p>
           
           <div class="education-section">
             <h3 class="education-title">Education</h3>
             <div class="education-item">
-              <p class="education-degree">BA Honors Sociology</p>
+              <p class="education-degree">AB Honors Sociology</p>
               <p class="education-school">Brown University, USA</p>
               <p class="education-years">2018-2022.5</p>
             </div>
@@ -44,12 +51,13 @@ import site from '../data/site.json';
 
 <style>
   .about {
-    padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
   }
   
   .about-header {
-    max-width: var(--max-width);
-    margin: 0 auto var(--space-2xl);
+    max-width: 1100px;
+    margin: 0 auto var(--space-3xl);
+    padding: 0 40px;
   }
   
   @font-face {
@@ -69,20 +77,22 @@ import site from '../data/site.json';
   }
   
   .about-content {
-    max-width: var(--max-width);
+    max-width: 1100px;
     margin: 0 auto;
+    padding: 0 40px;
   }
   
   .about-main {
     display: grid;
-    grid-template-columns: 1fr 1.5fr;
-    gap: var(--space-2xl);
+    grid-template-columns: 280px 1fr;
+    gap: var(--space-3xl);
     align-items: start;
   }
   
   .about-portrait {
     position: sticky;
-    top: var(--space-3xl);
+    top: var(--space-2xl);
+    height: fit-content;
   }
   
   .portrait-image {
@@ -90,6 +100,7 @@ import site from '../data/site.json';
     background: var(--color-bg-alt);
     border-radius: 2px;
     overflow: hidden;
+    width: 100%;
   }
   
   .portrait-image img {
@@ -110,21 +121,23 @@ import site from '../data/site.json';
   }
   
   .about-text {
-    max-width: 600px;
+    max-width: 100%;
+    padding-top: 0;
   }
   
   .education-section {
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-lg);
+    margin-top: var(--space-lg);
   }
   
   .education-title {
-    font-family: var(--font-serif);
-    font-size: var(--text-xs);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: var(--text-sm);
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     margin-bottom: var(--space-md);
-    color: var(--color-text-subtle);
+    color: var(--color-text);
   }
   
   .education-item {
@@ -132,31 +145,37 @@ import site from '../data/site.json';
   }
   
   .education-degree {
-    font-family: var(--font-serif);
+    font-family: 'Hanken Grotesk', sans-serif;
     font-size: var(--text-base);
+    font-weight: 400;
     color: var(--color-text);
     margin: 0 0 0.25rem 0;
     line-height: 1.4;
   }
   
   .education-school {
+    font-family: 'Hanken Grotesk', sans-serif;
     font-size: var(--text-sm);
-    color: var(--color-text-muted);
+    font-weight: 400;
+    color: var(--color-text);
     margin: 0 0 0.25rem 0;
   }
   
   .education-years {
-    font-size: var(--text-xs);
-    color: var(--color-text-subtle);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: var(--text-sm);
+    font-weight: 400;
+    color: var(--color-text);
     margin: 0;
   }
   
   .about-intro {
-    font-family: var(--font-serif);
-    font-size: var(--text-xl);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-size: var(--text-sm);
+    font-weight: 500;
     line-height: 1.6;
-    margin-bottom: var(--space-xl);
-    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    color: var(--color-text);
   }
   
   .resume-button {
@@ -167,8 +186,8 @@ import site from '../data/site.json';
     text-decoration: none;
     border: 1.5px solid var(--color-text);
     border-radius: 2px;
+    font-family: 'Hanken Grotesk', sans-serif;
     font-size: var(--text-sm);
-    font-family: var(--font-serif);
     letter-spacing: 0.025em;
     transition: all var(--transition-base);
     position: relative;
