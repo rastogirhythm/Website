@@ -19,30 +19,34 @@ import site from '../data/site.json';
         </div>
         
         <div class="about-text">
-          <p class="about-intro">
-            I am a design researcher working across social impact, climate initiatives, and community-led projects. My approach is qualitative, conceptual, and interdisciplinary, drawing from natural patterns, regenerative design, and creative processes.
-          </p>
+          <div class="bio-section">
+            <p class="about-intro">
+              I am a design researcher working across social impact, climate initiatives, and community-led projects. My approach is qualitative, conceptual, and interdisciplinary, drawing from natural patterns, regenerative design, and creative processes.
+            </p>
 
-          <p class="about-intro">
-            Trained in Sociology and Urban Studies at Brown University, I work through field research, participatory methods, and facilitation to understand how people relate to nature, livelihoods, and one another. My practice has taken shape across academia, grassroots movements, and nonprofit spaces, and more recently through curating and creating experiences that experiment with alternative ways of researching and sense-making together.
-          </p>
+            <p class="about-intro">
+              Trained in Sociology and Urban Studies at Brown University, I work through field research, participatory methods, and facilitation to understand how people relate to nature, livelihoods, and one another. My practice has taken shape across academia, grassroots movements, and nonprofit spaces, and more recently through curating and creating experiences that experiment with alternative ways of researching and sense-making together.
+            </p>
 
-          <p class="about-intro">
-            Alongside this, I ground my work in material and ecological practice to incorporate ideas of regeneration in everyday life. I've grown pocket forests and a community greenspace in Baroda-Savitri Urban Food Forest. My honors thesis also explored ecological networks as a way of thinking about community ecosystems.
-          </p>
+            <p class="about-intro">
+              Alongside this, I ground my work in material and ecological practice to incorporate ideas of regeneration in everyday life. I've grown pocket forests and a community greenspace in Baroda-Savitri Urban Food Forest. My honors thesis also explored ecological networks as a way of thinking about community ecosystems.
+            </p>
+          </div>
           
           <div class="education-section">
             <h3 class="education-title">Education</h3>
             <div class="education-item">
-              <p class="education-degree">AB Honors Sociology</p>
+              <p class="education-degree">Bachelor of Arts (Honors) Sociology</p>
               <p class="education-school">Brown University, USA</p>
               <p class="education-years">2018-2022.5</p>
             </div>
           </div>
           
-          <a href="/Website/pdfs/resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-button">
-            Download Resume
-          </a>
+          <div class="cta-section">
+            <a href="/Website/pdfs/resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-button">
+              Download Resume
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -51,13 +55,16 @@ import site from '../data/site.json';
 
 <style>
   .about {
-    padding: var(--space-3xl) var(--space-2xl) var(--space-2xl);
+    padding: var(--space-3xl) var(--space-lg) var(--space-2xl);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    max-width: var(--max-width);
+    margin: 0 auto;
   }
   
   .about-header {
-    max-width: 1100px;
-    margin: 0 auto var(--space-3xl);
-    padding: 0 40px;
+    margin-bottom: var(--space-2xl);
   }
   
   @font-face {
@@ -77,22 +84,36 @@ import site from '../data/site.json';
   }
   
   .about-content {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 40px;
+    flex: 1;
   }
   
   .about-main {
     display: grid;
     grid-template-columns: 280px 1fr;
-    gap: var(--space-3xl);
+    gap: var(--space-lg);
     align-items: start;
+  }
+
+  .about-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  
+  .bio-section {
+    margin-bottom: var(--space-lg);
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .bio-section .about-intro:last-child {
+    margin-bottom: 0;
   }
   
   .about-portrait {
-    position: sticky;
-    top: var(--space-2xl);
-    height: fit-content;
+    position: static;
+    height: auto;
+    margin-top: var(--space-lg);
   }
   
   .portrait-image {
@@ -101,6 +122,7 @@ import site from '../data/site.json';
     border-radius: 2px;
     overflow: hidden;
     width: 100%;
+    max-width: 280px;
   }
   
   .portrait-image img {
@@ -123,59 +145,67 @@ import site from '../data/site.json';
   .about-text {
     max-width: 100%;
     padding-top: 0;
+    display: flex;
+    flex-direction: column;
   }
   
   .education-section {
-    margin-bottom: var(--space-lg);
-    margin-top: var(--space-lg);
+    margin-bottom: var(--space-md);
+    padding-bottom: 0;
+    border-bottom: none;
   }
   
   .education-title {
     font-family: 'Hanken Grotesk', sans-serif;
-    font-size: var(--text-sm);
-    font-weight: 600;
-    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: var(--space-md);
+    margin-bottom: 0.5rem;
     color: var(--color-text);
   }
   
   .education-item {
-    margin-bottom: var(--space-md);
+    margin-bottom: 0;
   }
   
   .education-degree {
     font-family: 'Hanken Grotesk', sans-serif;
-    font-size: var(--text-base);
-    font-weight: 400;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: var(--color-text);
-    margin: 0 0 0.25rem 0;
-    line-height: 1.4;
+    margin: 0 0 0.2rem 0;
+    line-height: 1.3;
   }
   
   .education-school {
     font-family: 'Hanken Grotesk', sans-serif;
-    font-size: var(--text-sm);
+    font-size: 0.8rem;
     font-weight: 400;
-    color: var(--color-text);
-    margin: 0 0 0.25rem 0;
+    color: #666666;
+    margin: 0 0 0.1rem 0;
   }
   
   .education-years {
     font-family: 'Hanken Grotesk', sans-serif;
-    font-size: var(--text-sm);
+    font-size: 0.8rem;
     font-weight: 400;
-    color: var(--color-text);
+    color: #666666;
     margin: 0;
+  }
+
+  .cta-section {
+    margin-top: var(--space-sm);
   }
   
   .about-intro {
     font-family: 'Hanken Grotesk', sans-serif;
-    font-size: var(--text-sm);
-    font-weight: 500;
+    font-size: 1rem;
+    font-weight: 400;
     line-height: 1.6;
-    margin-bottom: var(--space-md);
+    margin-bottom: 0.6rem;
     color: var(--color-text);
+    text-align: left;
   }
   
   .resume-button {
