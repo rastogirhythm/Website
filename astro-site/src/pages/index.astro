@@ -20,7 +20,7 @@ const featuredProjects = projects
     <div class="hero-content">
       <!-- Name with elegant spacing -->
       <h1 class="hero-name">
-        <span class="name-first"><em>rhythm</em></span>
+        <span class="name-first"><em><span class="letter">r</span><span class="letter">h</span><span class="letter">y</span><span class="letter">t</span><span class="letter">h</span><span class="letter">m</span></em></span>
         <span class="name-last">rastogi</span>
       </h1>
       
@@ -55,11 +55,11 @@ const featuredProjects = projects
 
   /* Hero Section */
   .hero {
-    min-height: 100vh;
+    min-height: 86vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1.5rem;
-    padding: var(--space-3xl) var(--space-2xl) var(--space-ul);
+    padding: var(--space-xl) var(--space-2xl) var(--space-ul);
     align-items: center;
   }
   
@@ -74,6 +74,12 @@ const featuredProjects = projects
     margin-bottom: 1.5rem;
     margin-top: 0;
     letter-spacing: -0.01em;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+  
+  .hero-name:hover {
+    color: #4d524a;
   }
   
   .name-first {
@@ -83,9 +89,22 @@ const featuredProjects = projects
     letter-spacing: -0.02em;
   }
   
+  .letter {
+    display: inline-block;
+    transition: transform var(--transition-fast);
+  }
+  
+  .hero-name:hover .letter:nth-child(odd) {
+    transform: translateY(-1px);
+  }
+  
+  .hero-name:hover .letter:nth-child(even) {
+    transform: translateY(1px);
+  }
+  
   .name-last {
     display: block;
-    font-family: 'FrauncesRoman', serif;
+    font-family: 'FrauncesItalic', serif;
     letter-spacing: -0.02em;
     font-weight: 350;
   }
@@ -93,7 +112,7 @@ const featuredProjects = projects
   .hero-tagline {
     font-family: 'Epilogue', sans-serif;
     font-size: var(--text-base);
-    color: #666666;
+    color: #4a4a4a;
     max-width: 380px;
     line-height: 1.6;
     margin-bottom: 1rem;
@@ -102,7 +121,7 @@ const featuredProjects = projects
   .hero-location {
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: var(--text-sm);
-    color: #666666;
+    color: #4a4a4a;
     letter-spacing: 0.02em;
     margin-bottom: var(--space-md);
   }
@@ -117,13 +136,13 @@ const featuredProjects = projects
   .social-link {
     font-family: 'Hanken Grotesk', sans-serif;
     font-size: var(--text-sm);
-    color: #666666;
+    color: #4a4a4a;
     text-decoration: none;
     transition: color var(--transition-fast);
   }
   
   .social-link:hover {
-    color: var(--color-accent);
+    color: #5a7366;
   }
   
   /* Floating Images */
@@ -132,6 +151,7 @@ const featuredProjects = projects
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    border-radius: 4px;
   }
   
   .hero-bg-image {
@@ -145,7 +165,7 @@ const featuredProjects = projects
   }
   
   .hero-bg-image:hover {
-    transform: scale(1.25);
+    transform: scale(1.7);
   }
   
   /* Intro Section */
@@ -190,7 +210,6 @@ const featuredProjects = projects
   @media (max-width: 900px) {
     .hero {
       grid-template-columns: 1fr;
-      gap: var(--space-2xl);
       padding: var(--space-2xl) var(--space-lg) var(--space-xl);
       min-height: auto;
     }
